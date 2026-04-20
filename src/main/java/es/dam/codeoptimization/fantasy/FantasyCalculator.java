@@ -12,132 +12,131 @@ import es.dam.codeoptimization.PlayerStats;
 public class FantasyCalculator {
 
     // Method to calculate the points
-    public static int calcP(PlayerStats s) {
-        int r = 0; 
-        int punts = 0;
+    public static int calculatePoints(PlayerStats stats) {
+        int puntosTotales = 0; 
         
-        int minutes = s.minutes;
-        int goals = s.goals;
-        int assists = s.assists;
-        boolean yeloowCard = s.yellowCard;
-        boolean redCard = s.redCard;
-        int paradas = s.saves;
-        int goalsAgainst = s.goalsAgainst;
-        char matchResult = s.matchResult;
-        String position = s.position;
+        int minutes = stats.minutes;
+        int goals = stats.goals;
+        int assists = stats.assists;
+        boolean yeloowCard = stats.yellowCard;
+        boolean redCard = stats.redCard;
+        int paradas = stats.saves;
+        int goalsAgainst = stats.goalsAgainst;
+        char matchResult = stats.matchResult;
+        String position = stats.position;
 
         // --- GOALKEEPER LOGIC ---
         if (position.equals("PORTERO")) {
             if (minutes > 0 && minutes < 60) {
-                r = r + 3;
+                puntosTotales = puntosTotales + 3;
             } else if (minutes >= 60) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
             for (int i = 0; i < goals; i++) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
-            r = r + (assists * 6);
+            puntosTotales = puntosTotales + (assists * 6);
 
             // 1 point per save
-            r = r + paradas; 
+            puntosTotales = puntosTotales + paradas; 
             
             if (goalsAgainst == 0) {
-                r = r + 5; 
+                puntosTotales = puntosTotales + 5; 
             } else if (goalsAgainst == 1) {
-                r = r + 3;
+                puntosTotales = puntosTotales + 3;
             } else if (goalsAgainst == 2) {
-                r = r + 1;
+                puntosTotales = puntosTotales + 1;
             }
 
-            if (yeloowCard == true) r = r - 3; 
-            if (redCard == true) r = r - 5;
+            if (yeloowCard == true) puntosTotales = puntosTotales - 3; 
+            if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             } else if (matchResult == 'E') {
-                r = r + 2;
+                puntosTotales = puntosTotales + 2;
             }
 
         // --- DEFENDER LOGIC ---
         } else if (position.equals("DEFENSA")) {
             if (minutes > 0 && minutes < 60) {
-                r = r + 3;
+                puntosTotales = puntosTotales + 3;
             } else if (minutes >= 60) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
             for (int i = 0; i < goals; i++) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
-            r = r + (assists * 6);
+            puntosTotales = puntosTotales + (assists * 6);
 
             if (goalsAgainst == 0) {
-                r = r + 5; 
+                puntosTotales = puntosTotales + 5; 
             } else if (goalsAgainst == 1) {
-                r = r + 3;
+                puntosTotales = puntosTotales + 3;
             } else if (goalsAgainst == 2) {
-                r = r + 1;
+                puntosTotales = puntosTotales + 1;
             }
 
-            if (yeloowCard == true) r = r - 3;
-            if (redCard == true) r = r - 5;
+            if (yeloowCard == true) puntosTotales = puntosTotales - 3;
+            if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             } else if (matchResult == 'E') {
-                r = r + 2;
+                puntosTotales = puntosTotales + 2;
             }
 
         // --- MIDFIELDER LOGIC ---
         } else if (position.equals("MEDIO")) {
             if (minutes > 0 && minutes < 60) {
-                r = r + 3;
+                puntosTotales = puntosTotales + 3;
             } else if (minutes >= 60) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
             for (int i = 0; i < goals; i++) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
-            r = r + (assists * 6);
+            puntosTotales = puntosTotales + (assists * 6);
 
-            if (yeloowCard == true) r = r - 3;
-            if (redCard == true) r = r - 5;
+            if (yeloowCard == true) puntosTotales = puntosTotales - 3;
+            if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             } else if (matchResult == 'E') {
-                r = r + 2;
+                puntosTotales = puntosTotales + 2;
             }
 
         // --- FORWARD LOGIC ---
         } else if (position.equals("DELANTERO")) {
             if (minutes > 0 && minutes < 60) {
-                r = r + 3;
+                puntosTotales = puntosTotales + 3;
             } else if (minutes >= 60) {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             }
 
             for (int i = 0; i < goals; i++) {
-                r = r + 6;
+                puntosTotales = puntosTotales + 6;
             }
 
-            r = r + (assists * 5);
+            puntosTotales = puntosTotales + (assists * 5);
 
-            if (yeloowCard == true) r = r - 3;
-            if (redCard == true) r = r - 5;
+            if (yeloowCard == true) puntosTotales = puntosTotales - 3;
+            if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
-                r = r + 5;
+                puntosTotales = puntosTotales + 5;
             } else if (matchResult == 'E') {
-                r = r + 2;
+                puntosTotales = puntosTotales + 2;
             }
         }
 
-        return r;
+        return puntosTotales;
     }
 }
