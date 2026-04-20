@@ -48,8 +48,8 @@ public class FantasyCalculator {
             
             puntosTotales = calculatePointsGoalsAgainst(goalsAgainst, puntosTotales);
 
-            if (yelowCard == true) puntosTotales = puntosTotales - 3; 
-            if (redCard == true) puntosTotales = puntosTotales - 5;
+            puntosTotales = calculatePointsYellowCard(yelowCard, puntosTotales); 
+            puntosTotales = calculatePointsRedCard(redCard, puntosTotales);
             
             if (matchResult == 'G') {
                 puntosTotales = puntosTotales + 5;
@@ -73,8 +73,8 @@ public class FantasyCalculator {
 
             puntosTotales = calculatePointsGoalsAgainst(goalsAgainst, puntosTotales);
 
-            if (yelowCard == true) puntosTotales = puntosTotales - 3;
-            if (redCard == true) puntosTotales = puntosTotales - 5;
+            puntosTotales = calculatePointsYellowCard(yelowCard, puntosTotales);
+            puntosTotales = calculatePointsRedCard(redCard, puntosTotales);
             
             if (matchResult == 'G') {
                 puntosTotales = puntosTotales + 5;
@@ -96,8 +96,8 @@ public class FantasyCalculator {
 
             puntosTotales = puntosTotales + (assists * 6);
 
-            if (yelowCard == true) puntosTotales = puntosTotales - 3;
-            if (redCard == true) puntosTotales = puntosTotales - 5;
+            puntosTotales = calculatePointsYellowCard(yelowCard, puntosTotales);
+            puntosTotales = calculatePointsRedCard(redCard, puntosTotales);
             
             if (matchResult == 'G') {
                 puntosTotales = puntosTotales + 5;
@@ -119,8 +119,8 @@ public class FantasyCalculator {
 
             puntosTotales = puntosTotales + (assists * 5);
 
-            if (yelowCard == true) puntosTotales = puntosTotales - 3;
-            if (redCard == true) puntosTotales = puntosTotales - 5;
+            puntosTotales = calculatePointsYellowCard(yelowCard, puntosTotales);
+            puntosTotales = calculatePointsRedCard(redCard, puntosTotales);
             
             if (matchResult == 'G') {
                 puntosTotales = puntosTotales + 5;
@@ -129,6 +129,16 @@ public class FantasyCalculator {
             }
         }
 
+        return puntosTotales;
+    }
+
+    private static int calculatePointsYellowCard(boolean yelowCard, int puntosTotales) {
+        if (yelowCard) puntosTotales = puntosTotales - 3;
+        return puntosTotales;
+    }
+
+    private static int calculatePointsRedCard(boolean redCard, int puntosTotales) {
+        if (redCard) puntosTotales = puntosTotales - 5;
         return puntosTotales;
     }
 
