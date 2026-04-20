@@ -18,18 +18,21 @@ public class FantasyCalculator {
         int minutes = stats.minutes;
         int goals = stats.goals;
         int assists = stats.assists;
-        boolean yeloowCard = stats.yellowCard;
+        boolean yelowCard = stats.yellowCard;
         boolean redCard = stats.redCard;
         int paradas = stats.saves;
         int goalsAgainst = stats.goalsAgainst;
         char matchResult = stats.matchResult;
         String position = stats.position;
 
+        final int MINUTESMIN = 0;
+        final int MINUTESMAX = 60;
+        
         // --- GOALKEEPER LOGIC ---
         if (position.equals("PORTERO")) {
-            if (minutes > 0 && minutes < 60) {
+            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= 60) {
+            } else if (minutes >= MINUTESMAX) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -50,7 +53,7 @@ public class FantasyCalculator {
                 puntosTotales = puntosTotales + 1;
             }
 
-            if (yeloowCard == true) puntosTotales = puntosTotales - 3; 
+            if (yelowCard == true) puntosTotales = puntosTotales - 3; 
             if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
@@ -61,9 +64,9 @@ public class FantasyCalculator {
 
         // --- DEFENDER LOGIC ---
         } else if (position.equals("DEFENSA")) {
-            if (minutes > 0 && minutes < 60) {
+            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= 60) {
+            } else if (minutes >= MINUTESMAX) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -81,7 +84,7 @@ public class FantasyCalculator {
                 puntosTotales = puntosTotales + 1;
             }
 
-            if (yeloowCard == true) puntosTotales = puntosTotales - 3;
+            if (yelowCard == true) puntosTotales = puntosTotales - 3;
             if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
@@ -92,9 +95,9 @@ public class FantasyCalculator {
 
         // --- MIDFIELDER LOGIC ---
         } else if (position.equals("MEDIO")) {
-            if (minutes > 0 && minutes < 60) {
+            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= 60) {
+            } else if (minutes >= MINUTESMAX) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -104,7 +107,7 @@ public class FantasyCalculator {
 
             puntosTotales = puntosTotales + (assists * 6);
 
-            if (yeloowCard == true) puntosTotales = puntosTotales - 3;
+            if (yelowCard == true) puntosTotales = puntosTotales - 3;
             if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
@@ -115,9 +118,9 @@ public class FantasyCalculator {
 
         // --- FORWARD LOGIC ---
         } else if (position.equals("DELANTERO")) {
-            if (minutes > 0 && minutes < 60) {
+            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= 60) {
+            } else if (minutes >= MINUTESMAX) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -127,7 +130,7 @@ public class FantasyCalculator {
 
             puntosTotales = puntosTotales + (assists * 5);
 
-            if (yeloowCard == true) puntosTotales = puntosTotales - 3;
+            if (yelowCard == true) puntosTotales = puntosTotales - 3;
             if (redCard == true) puntosTotales = puntosTotales - 5;
             
             if (matchResult == 'G') {
