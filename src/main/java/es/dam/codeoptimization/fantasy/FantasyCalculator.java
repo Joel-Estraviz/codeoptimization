@@ -30,14 +30,8 @@ public class FantasyCalculator {
         
         // --- GOALKEEPER LOGIC ---
         if (position.equals("PORTERO")) {
-            final int POINTS_NOT_FULL_GAME = 3;
-            final int POINTS_FULL_GAME = 5;
             
-            if (hasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
-                puntosTotales = puntosTotales + POINTS_NOT_FULL_GAME;
-            } else if (hasPlayedMinutesMax(minutes, MINUTESMAX)) {
-                puntosTotales = puntosTotales + POINTS_FULL_GAME;
-            }
+            puntosTotales = getPointsMinutes(minutes, MINUTESMIN, MINUTESMAX, puntosTotales);
 
             puntosTotales = getPointsGoals(goals, puntosTotales);
 
@@ -59,11 +53,7 @@ public class FantasyCalculator {
 
         // --- DEFENDER LOGIC ---
         } else if (position.equals("DEFENSA")) {
-            if (hasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
-                puntosTotales = puntosTotales + 3;
-            } else if (hasPlayedMinutesMax(minutes, MINUTESMAX)) {
-                puntosTotales = puntosTotales + 5;
-            }
+            puntosTotales = getPointsMinutes(minutes, MINUTESMIN, MINUTESMAX, puntosTotales);
 
             for (int i = 0; i < goals; i++) {
                 puntosTotales = puntosTotales + 5;
@@ -84,11 +74,7 @@ public class FantasyCalculator {
 
         // --- MIDFIELDER LOGIC ---
         } else if (position.equals("MEDIO")) {
-            if (hasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
-                puntosTotales = puntosTotales + 3;
-            } else if (hasPlayedMinutesMax(minutes, MINUTESMAX)) {
-                puntosTotales = puntosTotales + 5;
-            }
+            puntosTotales = getPointsMinutes(minutes, MINUTESMIN, MINUTESMAX, puntosTotales);
 
             for (int i = 0; i < goals; i++) {
                 puntosTotales = puntosTotales + 5;
@@ -107,11 +93,7 @@ public class FantasyCalculator {
 
         // --- FORWARD LOGIC ---
         } else if (position.equals("DELANTERO")) {
-            if (hasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
-                puntosTotales = puntosTotales + 3;
-            } else if (hasPlayedMinutesMax(minutes, MINUTESMAX)) {
-                puntosTotales = puntosTotales + 5;
-            }
+            puntosTotales = getPointsMinutes(minutes, MINUTESMIN, MINUTESMAX, puntosTotales);
 
             for (int i = 0; i < goals; i++) {
                 puntosTotales = puntosTotales + 6;
@@ -129,6 +111,18 @@ public class FantasyCalculator {
             }
         }
 
+        return puntosTotales;
+    }
+
+    private static int getPointsMinutes(int minutes, final int MINUTESMIN, final int MINUTESMAX, int puntosTotales) {
+        final int POINTS_NOT_FULL_GAME = 3;
+        final int POINTS_FULL_GAME = 5;
+        
+        if (hasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
+            puntosTotales = puntosTotales + POINTS_NOT_FULL_GAME;
+        } else if (hasPlayedMinutesMax(minutes, MINUTESMAX)) {
+            puntosTotales = puntosTotales + POINTS_FULL_GAME;
+        }
         return puntosTotales;
     }
 
