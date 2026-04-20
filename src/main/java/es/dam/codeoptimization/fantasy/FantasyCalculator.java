@@ -30,12 +30,17 @@ public class FantasyCalculator {
         
         // --- GOALKEEPER LOGIC ---
         if (position.equals("PORTERO")) {
-            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
-                puntosTotales = puntosTotales + 3;
-            } else if (minutes >= MINUTESMAX) {
-                puntosTotales = puntosTotales + 5;
+            final int POINTS_NOT_FULL_GAME = 3;
+            final int POINTS_FULL_GAME = 5;
+            
+            if (HasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
+                puntosTotales = puntosTotales + POINTS_NOT_FULL_GAME;
+            } else if (HasPlayedMinutesMax(minutes, MINUTESMAX)) {
+                puntosTotales = puntosTotales + POINTS_FULL_GAME;
             }
 
+            final int POINTSEACHGOAL = 5;
+            
             for (int i = 0; i < goals; i++) {
                 puntosTotales = puntosTotales + 5;
             }
@@ -64,9 +69,9 @@ public class FantasyCalculator {
 
         // --- DEFENDER LOGIC ---
         } else if (position.equals("DEFENSA")) {
-            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
+            if (HasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= MINUTESMAX) {
+            } else if (HasPlayedMinutesMax(minutes, MINUTESMAX)) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -95,9 +100,9 @@ public class FantasyCalculator {
 
         // --- MIDFIELDER LOGIC ---
         } else if (position.equals("MEDIO")) {
-            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
+            if (HasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= MINUTESMAX) {
+            } else if (HasPlayedMinutesMax(minutes, MINUTESMAX)) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -118,9 +123,9 @@ public class FantasyCalculator {
 
         // --- FORWARD LOGIC ---
         } else if (position.equals("DELANTERO")) {
-            if (minutes > MINUTESMIN && minutes < MINUTESMAX) {
+            if (HasPlayedNotMinutesMax(minutes, MINUTESMIN, MINUTESMAX)) {
                 puntosTotales = puntosTotales + 3;
-            } else if (minutes >= MINUTESMAX) {
+            } else if (HasPlayedMinutesMax(minutes, MINUTESMAX)) {
                 puntosTotales = puntosTotales + 5;
             }
 
@@ -141,5 +146,13 @@ public class FantasyCalculator {
         }
 
         return puntosTotales;
+    }
+
+    private static boolean HasPlayedNotMinutesMax(int minutes, final int MINUTESMIN, final int MINUTESMAX) {
+        return minutes > MINUTESMIN && minutes < MINUTESMAX;
+    }
+
+    private static boolean HasPlayedMinutesMax(int minutes, final int MINUTESMAX) {
+        return minutes >= MINUTESMAX;
     }
 }
